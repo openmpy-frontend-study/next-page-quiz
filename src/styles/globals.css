@@ -33,3 +33,7 @@ a {
     min-height: 74.5vh;
   }
 }
+
+.title {
+  text-align: center;
+}

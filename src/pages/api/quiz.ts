@@ -4,13 +4,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 const questionsAndAnswers: TQuiz[] = [
   {
     id: 1,
-    question: "1 + 1 = ?",
+    question: "1+1 ?",
     options: ["1", "2", "3", "4"],
     answer: "2",
   },
   {
     id: 2,
-    question: "2 + 2 = ?",
+    question: "2+2 ?",
     options: ["1", "2", "3", "4"],
     answer: "4",
   },
@@ -28,6 +28,7 @@ export default function handler(
     }
 
     let pageToNum = parseInt(page);
+
     const quiz = questionsAndAnswers[pageToNum];
     const lastPage = questionsAndAnswers.length - 1;
     const numOfQuestion = questionsAndAnswers.length;

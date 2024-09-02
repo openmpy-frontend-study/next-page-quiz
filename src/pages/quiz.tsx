@@ -6,9 +6,10 @@ import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Quiz() {
+const Quiz = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const { data, error } = useSWR(`/api/quiz?page=${pageIndex}`, fetcher);
+
   const [answered, setAnswered] = useState<TSavedAnswer>({});
 
   if (error) {
@@ -32,16 +33,15 @@ export default function Quiz() {
   const addAnswer = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const latestAnswers = { ...answered, [name]: value };
-
     setAnswered(latestAnswers);
-    localStorage.setItem("answers", JSON.stringify(latestAnswers));
+    localStorage.setItem("quiz", JSON.stringify(latestAnswers));
   };
 
   return (
     <>
       <div className={styles.info}>
         <p>
-          {parseInt(page) + 1} / {total}
+          {parseInt(page) + 1} of {total}
         </p>
       </div>
       <div>
@@ -65,7 +65,7 @@ export default function Quiz() {
       </div>
       <div className={styles.navBtns}>
         {prev ? (
-          <button onClick={() => setPageIndex(pageIndex - 1)}>이전</button>
+          <button onClick={() => setPageIndex(pageIndex - 1)}>이전 문제</button>
         ) : (
           <Link href="/">취소</Link>
         )}
@@ -80,13 +80,11 @@ export default function Quiz() {
             다음 문제
           </button>
         ) : (
-          answered[quiz.id] !== undefined && (
-            <Link href="/result">
-              <button>끝</button>
-            </Link>
-          )
+          answered[quiz.id] !== undefined && <Link href="/result">끝</Link>
         )}
       </div>
     </>
   );
-}
+};
+
+export default Quiz;

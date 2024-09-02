@@ -11,7 +11,7 @@ export default function Header() {
       </Head>
 
       <header>
-        <h1>퀴즈 앱</h1>
+        <h1 className="title">퀴즈 앱</h1>
       </header>
     </>
   );
