@@ -25,37 +25,37 @@ export default function handler(
 
     if (!page) {
       res.send(questionsAndAnswers);
+    }
 
-      let pageToNum = parseInt(page);
-      const quiz = questionsAndAnswers[pageToNum];
-      const lastPage = questionsAndAnswers.length - 1;
-      const numOfQuestion = questionsAndAnswers.length;
+    let pageToNum = parseInt(page);
+    const quiz = questionsAndAnswers[pageToNum];
+    const lastPage = questionsAndAnswers.length - 1;
+    const numOfQuestion = questionsAndAnswers.length;
 
-      if (pageToNum === 0) {
-        res.send({
-          prev: false,
-          next: true,
-          page,
-          quiz,
-          total: numOfQuestion,
-        });
-      } else if (pageToNum === lastPage) {
-        res.send({
-          prev: true,
-          next: false,
-          page,
-          quiz,
-          total: numOfQuestion,
-        });
-      } else {
-        res.send({
-          prev: true,
-          next: true,
-          page,
-          quiz,
-          total: numOfQuestion,
-        });
-      }
+    if (pageToNum === 0) {
+      res.send({
+        prev: false,
+        next: true,
+        page,
+        quiz,
+        total: numOfQuestion,
+      });
+    } else if (pageToNum === lastPage) {
+      res.send({
+        prev: true,
+        next: false,
+        page,
+        quiz,
+        total: numOfQuestion,
+      });
+    } else {
+      res.send({
+        prev: true,
+        next: true,
+        page,
+        quiz,
+        total: numOfQuestion,
+      });
     }
   } catch (error) {
     res.status(500);
